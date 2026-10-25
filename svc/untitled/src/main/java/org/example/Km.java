@@ -26,8 +26,9 @@ public class Km extends KeyedProcessFunction<String, Long, String> {
         Long currentCount = count.value();
         if (currentCount == null) {
             System.out.println("set up timer");
-            // watermark required
-            //ctx.timerService().registerEventTimeTimer(5000);
+            // // watermark required
+            // long deadline = ctx.timestamp() + 5_000;
+            //ctx.timerService().registerEventTimeTimer(deadline);
 
             long now = ctx.timerService().currentProcessingTime();
             ctx.timerService().registerProcessingTimeTimer(now+5000);
